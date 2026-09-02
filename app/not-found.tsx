@@ -1,10 +1,18 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function NotFound() {
   return (
     <div className="stage">
       <div className="backdrop" aria-hidden="true">
-        <div className="backdrop-image" />
+        <Image
+          className="backdrop-photo"
+          src="/images/banner.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+        />
         <div className="backdrop-wash" />
         <div className="backdrop-grain" />
       </div>

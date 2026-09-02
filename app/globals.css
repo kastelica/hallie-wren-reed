@@ -86,17 +86,13 @@ a {
   position: fixed;
   inset: 0;
   z-index: 0;
+  overflow: hidden;
   pointer-events: none;
 }
 
-.backdrop-image {
-  position: absolute;
-  inset: 0;
-  background-color: var(--sky);
-  background-image: url("/images/banner.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: 72% 42%;
+.backdrop-photo {
+  object-fit: cover;
+  object-position: 8% 40%;
 }
 
 .backdrop-wash {
@@ -388,23 +384,24 @@ a {
     padding: 2.5rem 6vw 2.5rem 2rem;
   }
 
-  .backdrop-image {
-    background-position: 32% 46%;
+  .backdrop-photo {
+    /* Composed plate: porch left, open night right — no baked-in type. */
+    object-position: 50% 42%;
   }
 
   .backdrop-wash {
     background:
       linear-gradient(
         90deg,
-        rgba(7, 16, 24, 0.08) 0%,
-        rgba(7, 16, 24, 0.18) 42%,
-        rgba(7, 16, 24, 0.62) 100%
+        rgba(7, 16, 24, 0.1) 0%,
+        rgba(7, 16, 24, 0.06) 40%,
+        rgba(7, 16, 24, 0.42) 100%
       ),
       linear-gradient(
         180deg,
-        rgba(7, 16, 24, 0.18) 0%,
-        rgba(7, 16, 24, 0.28) 55%,
-        rgba(7, 16, 24, 0.7) 100%
+        rgba(7, 16, 24, 0.16) 0%,
+        rgba(7, 16, 24, 0.22) 58%,
+        rgba(7, 16, 24, 0.58) 100%
       );
   }
 
@@ -433,10 +430,13 @@ a {
 }
 
 @media (max-width: 719px) {
+  .masthead {
+    width: min(100%, 26.5rem);
+    margin: 0.15rem 0 0.85rem;
+  }
+
   .masthead-title {
-    /* On phones the card is the title; keep the banner type quiet. */
-    font-size: 0;
-    overflow: hidden;
+    display: none;
   }
 
   .masthead-kicker {
