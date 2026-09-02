@@ -92,7 +92,7 @@ a {
 
 .backdrop-photo {
   object-fit: cover;
-  object-position: 16% 42%;
+  object-position: 8% 40%;
 }
 
 .backdrop-wash {
@@ -385,22 +385,23 @@ a {
   }
 
   .backdrop-photo {
-    object-position: 28% 46%;
+    /* Composed plate: porch left, open night right — no baked-in type. */
+    object-position: 50% 42%;
   }
 
   .backdrop-wash {
     background:
       linear-gradient(
         90deg,
-        rgba(7, 16, 24, 0.08) 0%,
-        rgba(7, 16, 24, 0.18) 42%,
-        rgba(7, 16, 24, 0.62) 100%
+        rgba(7, 16, 24, 0.1) 0%,
+        rgba(7, 16, 24, 0.06) 40%,
+        rgba(7, 16, 24, 0.42) 100%
       ),
       linear-gradient(
         180deg,
-        rgba(7, 16, 24, 0.18) 0%,
-        rgba(7, 16, 24, 0.28) 55%,
-        rgba(7, 16, 24, 0.7) 100%
+        rgba(7, 16, 24, 0.16) 0%,
+        rgba(7, 16, 24, 0.22) 58%,
+        rgba(7, 16, 24, 0.58) 100%
       );
   }
 
