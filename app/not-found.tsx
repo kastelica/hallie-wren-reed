@@ -12,6 +12,7 @@ export default function NotFound() {
           fill
           priority
           sizes="100vw"
+          unoptimized
         />
         <div className="backdrop-wash" />
         <div className="backdrop-grain" />

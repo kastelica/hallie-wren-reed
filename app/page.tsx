@@ -34,6 +34,7 @@ export default function HomePage() {
             fill
             priority
             sizes="100vw"
+            unoptimized
           />
           <div className="backdrop-wash" />
           <div className="backdrop-grain" />
