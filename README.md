@@ -1,6 +1,6 @@
 # Hallie Wren Reed
 
-Custom artist homepage for **Hallie Wren Reed** — a link tree for *Soft at the Elbows* that can grow into a fuller site later.
+Custom artist homepage for **Hallie Wren Reed** — a link tree for *Soft at the Elbows* and *Green Country*.
 
 Night-porch country: YouTube is live. Spotify, Apple Music, TikTok, and Instagram stay marked **Coming soon** until real URLs exist (no placeholder social links).
 

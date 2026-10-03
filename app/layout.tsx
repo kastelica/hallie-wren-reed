@@ -1,6 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Outfit, Alfa_Slab_One } from "next/font/google";
+import { artist } from "@/app/lib/data";
 import "./globals.css";
+
+const albumTitle = artist.albums.map((album) => album.title).join(" & ");
+const pageTitle = `${artist.name} — ${albumTitle}`;
+const pageDescription = `${artist.tagline} Hallie Wren Reed’s homepage for Soft at the Elbows and Green Country — modern country, porch-light choruses, lyric videos on YouTube.`;
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -29,22 +34,26 @@ const siteUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Hallie Wren Reed — Soft at the Elbows",
-  description:
-    "Night drives, almost-goodbyes, and the songs that stay. Hallie Wren Reed’s homepage for Soft at the Elbows — modern country, porch-light choruses, lyric videos on YouTube.",
+  title: pageTitle,
+  description: pageDescription,
   applicationName: "Hallie Wren Reed",
   authors: [{ name: "Hallie Wren Reed" }],
   keywords: [
     "Hallie Wren Reed",
     "Soft at the Elbows",
+    "Green Country",
     "country music",
     "Porch Light",
     "Come Back Slow",
+    "Oklahoma Wind",
+    "Two Counties Over",
+    "Where the Hills Stay Green",
+    "Carry It Tonight",
+    "Wide Open Friday",
   ],
   openGraph: {
-    title: "Hallie Wren Reed — Soft at the Elbows",
-    description:
-      "Night drives, almost-goodbyes, and the songs that stay.",
+    title: pageTitle,
+    description: artist.tagline,
     type: "website",
     locale: "en_US",
     siteName: "Hallie Wren Reed",
@@ -53,15 +62,14 @@ export const metadata: Metadata = {
         url: "/images/banner.jpg",
         width: 1920,
         height: 1080,
-        alt: "Soft at the Elbows — a night porch and distant town lights",
+        alt: "Hallie Wren Reed — Soft at the Elbows and Green Country",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Hallie Wren Reed — Soft at the Elbows",
-    description:
-      "Night drives, almost-goodbyes, and the songs that stay.",
+    title: pageTitle,
+    description: artist.tagline,
     images: ["/images/banner.jpg"],
   },
   icons: {

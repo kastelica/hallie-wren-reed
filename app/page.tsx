@@ -1,6 +1,31 @@
 import Image from "next/image";
 import { LinkRow } from "@/app/components/LinkRow";
-import { artist, links } from "@/app/lib/data";
+import { artist, links, type Track } from "@/app/lib/data";
+
+function TrackList({ tracks }: { tracks: Track[] }) {
+  const linked = tracks.some((track) => track.href);
+
+  if (!linked) {
+    return <span className="setlist-tracks">{tracks.map((track) => track.title).join(" · ")}</span>;
+  }
+
+  return (
+    <ul className="setlist-tracks">
+      {tracks.map((track) => (
+        <li key={track.title}>
+          {track.href ? (
+            <a href={track.href} target="_blank" rel="noopener noreferrer">
+              {track.title}
+              <span className="sr-only"> lyric video</span>
+            </a>
+          ) : (
+            track.title
+          )}
+        </li>
+      ))}
+    </ul>
+  );
+}
 
 export default function HomePage() {
   const jsonLd = {
@@ -9,10 +34,16 @@ export default function HomePage() {
     name: artist.name,
     genre: "Country",
     description: artist.tagline,
-    album: {
+    album: artist.albums.map((album) => ({
       "@type": "MusicAlbum",
-      name: artist.album,
-    },
+      name: album.title,
+      url: album.playlistHref,
+      track: album.tracks.map((track) => ({
+        "@type": "MusicRecording",
+        name: track.title,
+        ...(track.href ? { url: track.href } : {}),
+      })),
+    })),
     sameAs: ["https://www.youtube.com/@HallieWrenReed"],
   };
 
@@ -42,7 +73,13 @@ export default function HomePage() {
 
         <header className="masthead">
           <p className="masthead-kicker">{artist.name}</p>
-          <p className="masthead-title">{artist.album}</p>
+          <div className="masthead-albums">
+            {artist.albums.map((album) => (
+              <p className="masthead-title" key={album.id}>
+                {album.title}
+              </p>
+            ))}
+          </div>
         </header>
 
         <main className="card" id="home">
@@ -57,13 +94,29 @@ export default function HomePage() {
             />
           </div>
 
-          <p className="kicker">{artist.album}</p>
+          <div className="kickers">
+            {artist.albums.map((album) => (
+              <p className="kicker" key={album.id}>
+                {album.title}
+              </p>
+            ))}
+          </div>
           <h1 className="name">{artist.name}</h1>
           <p className="tagline">{artist.tagline}</p>
-          <p className="setlist">
-            <span className="setlist-label">From the record</span>
-            {artist.setlist.join(" · ")}
-          </p>
+
+          <div className="records">
+            {artist.albums.map((album) => (
+              <section className="record" key={album.id} aria-labelledby={`${album.id}-label`}>
+                <h2 className="setlist-label" id={`${album.id}-label`}>
+                  {album.title}
+                </h2>
+                <div className="setlist">
+                  <span className="sr-only">From the record. </span>
+                  <TrackList tracks={album.tracks} />
+                </div>
+              </section>
+            ))}
+          </div>
 
           <nav id="links" aria-label="Listen and follow">
             <ul className="links">

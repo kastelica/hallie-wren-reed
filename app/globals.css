@@ -135,8 +135,13 @@ a {
   color: rgba(255, 255, 255, 0.88);
 }
 
+.masthead-albums {
+  display: grid;
+  margin-top: 0.2rem;
+}
+
 .masthead-title {
-  margin: 0.2rem 0 0;
+  margin: 0;
   font-family: var(--font-display);
   font-size: clamp(1.55rem, 7.2vw, 2.15rem);
   line-height: 1;
@@ -145,6 +150,24 @@ a {
   text-shadow:
     0 1px 0 #1a1404,
     0 8px 24px rgba(0, 0, 0, 0.45);
+}
+
+.masthead-title + .masthead-title {
+  position: relative;
+  margin-top: 0.45rem;
+  padding-top: 0.85rem;
+}
+
+.masthead-title + .masthead-title::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3.25rem;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--yellow);
+  box-shadow: 0 0 12px var(--glow);
 }
 
 .card {
@@ -182,7 +205,16 @@ a {
     0 10px 24px rgba(0, 0, 0, 0.45);
 }
 
+.kickers {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  column-gap: 0.9rem;
+  row-gap: 0.2rem;
+}
+
 .kicker {
+  flex: 0 0 auto;
   margin: 0;
   text-align: center;
   font-size: 0.72rem;
@@ -213,10 +245,27 @@ a {
   color: var(--muted);
 }
 
+.records {
+  display: grid;
+  gap: 0.85rem;
+  margin: 0.95rem auto 1.15rem;
+}
+
+.record {
+  display: grid;
+  gap: 0.28rem;
+  text-align: center;
+}
+
+.record + .record {
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(243, 195, 46, 0.16);
+}
+
 .setlist {
   display: grid;
   gap: 0.2rem;
-  margin: 0.95rem auto 1.15rem;
+  margin: 0;
   text-align: center;
   font-size: 0.82rem;
   letter-spacing: 0.06em;
@@ -225,10 +274,51 @@ a {
 }
 
 .setlist-label {
-  display: block;
+  margin: 0;
   font-size: 0.65rem;
+  font-weight: 650;
   letter-spacing: 0.22em;
+  text-transform: uppercase;
   color: var(--quiet);
+}
+
+.setlist-tracks {
+  display: grid;
+  gap: 0.2rem;
+  justify-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.setlist-tracks a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(243, 195, 46, 0.45);
+}
+
+.setlist-tracks a:hover,
+.setlist-tracks a:focus-visible {
+  color: var(--yellow);
+  border-bottom-color: var(--yellow);
+}
+
+.setlist-tracks a:focus-visible {
+  outline: 2px solid var(--yellow);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .links {
@@ -424,6 +514,12 @@ a {
     font-size: clamp(2.6rem, 5.6vw, 4.4rem);
   }
 
+  /* Same type size as Soft at the Elbows. Cap only the later titles so
+     their lines stay left of the 26.5rem card. */
+  .masthead-albums .masthead-title:not(:first-child) {
+    max-width: min(100%, calc(100vw - 26.5rem - 13vw - 1.5rem));
+  }
+
   .card {
     width: 26.5rem;
   }
@@ -435,7 +531,7 @@ a {
     margin: 0.15rem 0 0.85rem;
   }
 
-  .masthead-title {
+  .masthead-albums {
     display: none;
   }
 
