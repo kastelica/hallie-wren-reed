@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { artist } from "@/app/lib/data";
 
 export default function NotFound() {
   return (
@@ -18,7 +19,13 @@ export default function NotFound() {
         <div className="backdrop-grain" />
       </div>
       <main className="card">
-        <p className="kicker">Soft at the Elbows</p>
+        <div className="kickers">
+          {artist.albums.map((album) => (
+            <p className="kicker" key={album.id}>
+              {album.title}
+            </p>
+          ))}
+        </div>
         <h1 className="name">This porch is empty</h1>
         <p className="tagline">That page isn’t here. Head back to the house.</p>
         <nav className="links" aria-label="Home">
