@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Jost } from "next/font/google";
+import { albums } from "@/app/lib/data";
 import "./globals.css";
 
 const pageTitle = "Hallie Wren Reed — Half a Whisper";
@@ -35,17 +36,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Hallie Wren Reed" }],
   keywords: [
     "Hallie Wren Reed",
-    "Half a Whisper",
-    "Vacancy Sign",
-    "Say It Quiet",
-    "The Space Between",
-    "Headlights",
-    "Velvet Hour",
-    "Undertow",
-    "Satellites",
-    "Radio Towers",
-    "Soft at the Elbows",
-    "Green Country",
+    ...albums.flatMap((album) => [album.title, ...album.tracks.map((track) => track.title)]),
     "country music",
     "country-pop",
   ],

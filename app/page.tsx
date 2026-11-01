@@ -1,20 +1,38 @@
 import Image from "next/image";
-import {
-  artist,
-  comingSoon,
-  featuredAlbum,
-  greenCountry,
-  shorts,
-  softAtTheElbows,
-  type Track,
-} from "@/app/lib/data";
+import { albums, artist, comingSoon, shorts, type Album, type Track } from "@/app/lib/data";
 
-function SongButton({ track }: { track: Track }) {
+function TrackButton({ index, track }: { index: number; track: Track }) {
+  const number = String(index + 1).padStart(2, "0");
+
   return (
-    <a className="btn btn-slim" href={track.href} target="_blank" rel="noopener noreferrer">
-      <span className="btn-label">{track.title}</span>
-      <span className="sr-only"> on YouTube</span>
-    </a>
+    <li>
+      <a className="btn btn-slim" href={track.href} target="_blank" rel="noopener noreferrer">
+        <span className="num">{number}</span>
+        <span className="btn-label">{track.title}</span>
+        <span className="sr-only"> on YouTube</span>
+      </a>
+    </li>
+  );
+}
+
+function AlbumSection({ album }: { album: Album }) {
+  return (
+    <section className={album.featured ? "album album-featured" : "album"} aria-labelledby={`${album.id}-title`}>
+      <div className="album-head">
+        <h2 className="album-title" id={`${album.id}-title`}>
+          {album.title}
+        </h2>
+        <a className="playlist-link" href={album.playlistHref} target="_blank" rel="noopener noreferrer">
+          Full playlist
+          <span className="sr-only"> for {album.title}</span>
+        </a>
+      </div>
+      <ul className="songs">
+        {album.tracks.map((track, index) => (
+          <TrackButton key={track.href} index={index} track={track} />
+        ))}
+      </ul>
+    </section>
   );
 }
 
@@ -25,33 +43,16 @@ export default function HomePage() {
     name: artist.name,
     url: "https://www.hallie.rocks",
     genre: ["Country", "Pop"],
-    album: [
-      {
-        "@type": "MusicAlbum",
-        name: featuredAlbum.title,
-        url: featuredAlbum.playlistHref,
-        track: featuredAlbum.tracks.map((track) => ({
-          "@type": "MusicRecording",
-          name: track.title,
-          url: track.href,
-        })),
-      },
-      {
-        "@type": "MusicAlbum",
-        name: greenCountry.title,
-        url: greenCountry.playlistHref,
-        track: greenCountry.tracks.map((track) => ({
-          "@type": "MusicRecording",
-          name: track.title,
-          url: track.href,
-        })),
-      },
-      {
-        "@type": "MusicAlbum",
-        name: softAtTheElbows.title,
-        url: softAtTheElbows.playlistHref,
-      },
-    ],
+    album: albums.map((album) => ({
+      "@type": "MusicAlbum",
+      name: album.title,
+      url: album.playlistHref,
+      track: album.tracks.map((track) => ({
+        "@type": "MusicRecording",
+        name: track.title,
+        url: track.href,
+      })),
+    })),
     sameAs: [artist.youtube],
   };
 
@@ -78,42 +79,17 @@ export default function HomePage() {
           <p className="tagline">{artist.tagline}</p>
         </header>
 
-        <nav id="links" className="stack" aria-label="Listen">
-          <div className="group">
-            <a
-              className="btn btn-feature"
-              href={featuredAlbum.playlistHref}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span className="btn-label">{featuredAlbum.title}</span>
-              <span className="btn-detail">{featuredAlbum.detail}</span>
-            </a>
-            {featuredAlbum.tracks.map((track) => (
-              <SongButton key={track.href} track={track} />
-            ))}
-          </div>
+        <div id="links" className="albums">
+          {albums.map((album) => (
+            <AlbumSection key={album.id} album={album} />
+          ))}
+        </div>
 
+        <nav className="stack" aria-label="More">
           <a className="btn" href={artist.youtube} target="_blank" rel="noopener noreferrer">
             <span className="btn-label">YouTube</span>
             <span className="btn-detail">{artist.handle}</span>
           </a>
-
-          <div className="group">
-            <a
-              className="btn btn-next"
-              href={greenCountry.playlistHref}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span className="btn-label">{greenCountry.title}</span>
-              <span className="btn-detail">{greenCountry.detail}</span>
-            </a>
-            {greenCountry.tracks.map((track) => (
-              <SongButton key={track.href} track={track} />
-            ))}
-          </div>
-
           <a className="btn" href={shorts.href} target="_blank" rel="noopener noreferrer">
             <span className="btn-label">{shorts.label}</span>
             <span className="btn-detail">{shorts.detail}</span>
@@ -128,13 +104,6 @@ export default function HomePage() {
             </li>
           ))}
         </ul>
-
-        <p className="soft">
-          <a href={softAtTheElbows.playlistHref} target="_blank" rel="noopener noreferrer">
-            {softAtTheElbows.title}
-            <span className="sr-only"> playlist on YouTube</span>
-          </a>
-        </p>
       </main>
     </>
   );
