@@ -42,6 +42,8 @@ export const metadata: Metadata = {
     "Headlights",
     "Velvet Hour",
     "Undertow",
+    "Satellites",
+    "Radio Towers",
     "Soft at the Elbows",
     "Green Country",
     "country music",

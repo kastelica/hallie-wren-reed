@@ -9,13 +9,13 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <main className="hero">
-      <p className="eyebrow">{artist.name}</p>
-      <h1 className="hero-title hero-title-quiet">This page isn’t here</h1>
-      <div className="rule" aria-hidden="true" />
-      <p className="lede">Head back home.</p>
-      <Link className="button" href="/">
-        Back home
+    <main className="column">
+      <header className="profile">
+        <p className="name">{artist.name}</p>
+        <h1 className="tagline">This page isn’t here</h1>
+      </header>
+      <Link className="btn btn-feature" href="/">
+        <span className="btn-label">Back home</span>
       </Link>
     </main>
   );
