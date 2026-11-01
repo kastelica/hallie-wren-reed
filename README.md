@@ -1,8 +1,8 @@
 # Hallie Wren Reed
 
-Homepage for **Hallie Wren Reed**, focused on the album *Half a Whisper*.
+Homepage for **Hallie Wren Reed**, a compact link-in-bio for the album *Half a Whisper*.
 
-Quiet late-night layout: near-black blue, one cool glow, cream Cormorant Garamond titles, wide-tracked Jost labels. YouTube is live. Spotify, Apple Music, TikTok, and Instagram stay marked **Coming soon** until real URLs exist.
+Quiet late-night column: near-black blue, one cool glow, cream Cormorant Garamond titles, wide-tracked Jost labels. YouTube is live. Spotify, Apple Music, TikTok, and Instagram stay marked **Coming soon** until real URLs exist.
 
 ## Local development
 
