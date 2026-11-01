@@ -10,25 +10,28 @@ export type Album = {
   playlistHref: string;
 };
 
-export type ArtistLink =
-  | {
-      id: string;
-      label: string;
-      detail: string;
-      href: string;
-      live: true;
-      icon: "youtube" | "playlist" | "spotify" | "apple" | "tiktok" | "instagram";
-    }
-  | {
-      id: string;
-      label: string;
-      detail: string;
-      href?: undefined;
-      live: false;
-      icon: "youtube" | "playlist" | "spotify" | "apple" | "tiktok" | "instagram";
-    };
+export type ComingSoon = {
+  id: string;
+  label: string;
+  detail: string;
+};
 
-export const albums: Album[] = [
+export const featuredAlbum: Album & { releaseLine: string } = {
+  id: "half-a-whisper",
+  title: "Half a Whisper",
+  releaseLine: "the new album · out now",
+  playlistHref: "https://www.youtube.com/playlist?list=PLbnMwUmQkSoo",
+  tracks: [
+    { title: "Vacancy Sign", href: "https://youtu.be/XwJjesYaVEw" },
+    { title: "Say It Quiet", href: "https://youtu.be/IkNqUEHaiwU" },
+    { title: "The Space Between", href: "https://youtu.be/tu_f_tALJwg" },
+    { title: "Headlights", href: "https://youtu.be/mWMuXX31ea8" },
+    { title: "Velvet Hour", href: "https://youtu.be/G2m2yUkO5IQ" },
+    { title: "Undertow", href: "https://youtu.be/CF5hbFU8Fjc" },
+  ],
+};
+
+export const earlierAlbums: Album[] = [
   {
     id: "soft-at-the-elbows",
     title: "Soft at the Elbows",
@@ -51,55 +54,13 @@ export const albums: Album[] = [
 
 export const artist = {
   name: "Hallie Wren Reed",
-  tagline: "Night drives, almost-goodbyes, and the songs that stay.",
-  albums,
+  youtube: "https://www.youtube.com/@HallieWrenReed",
+  handle: "@HallieWrenReed",
 };
 
-const playlistLinks: ArtistLink[] = albums.map((album) => ({
-  id: `playlist-${album.id}`,
-  label: album.title,
-  detail: "The playlist",
-  href: album.playlistHref,
-  live: true,
-  icon: "playlist",
-}));
-
-export const links: ArtistLink[] = [
-  {
-    id: "youtube",
-    label: "YouTube",
-    detail: "Lyric videos & new songs",
-    href: "https://www.youtube.com/@HallieWrenReed",
-    live: true,
-    icon: "youtube",
-  },
-  ...playlistLinks,
-  {
-    id: "spotify",
-    label: "Spotify",
-    detail: "Streaming",
-    live: false,
-    icon: "spotify",
-  },
-  {
-    id: "apple",
-    label: "Apple Music",
-    detail: "Streaming",
-    live: false,
-    icon: "apple",
-  },
-  {
-    id: "tiktok",
-    label: "TikTok",
-    detail: "Shorts & behind the songs",
-    live: false,
-    icon: "tiktok",
-  },
-  {
-    id: "instagram",
-    label: "Instagram",
-    detail: "Photos from the road",
-    live: false,
-    icon: "instagram",
-  },
+export const comingSoon: ComingSoon[] = [
+  { id: "spotify", label: "Spotify", detail: "Streaming" },
+  { id: "apple", label: "Apple Music", detail: "Streaming" },
+  { id: "tiktok", label: "TikTok", detail: "Shorts & behind the songs" },
+  { id: "instagram", label: "Instagram", detail: "Photos from the road" },
 ];

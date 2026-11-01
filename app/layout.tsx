@@ -1,28 +1,23 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Outfit, Alfa_Slab_One } from "next/font/google";
-import { artist } from "@/app/lib/data";
+import { Cormorant_Garamond, Jost } from "next/font/google";
 import "./globals.css";
 
-const albumTitle = artist.albums.map((album) => album.title).join(" & ");
-const pageTitle = `${artist.name} — ${albumTitle}`;
-const pageDescription = `${artist.tagline} Hallie Wren Reed’s homepage for Soft at the Elbows and Green Country — modern country, porch-light choruses, lyric videos on YouTube.`;
+const pageTitle = "Hallie Wren Reed — Half a Whisper";
+const pageDescription =
+  "Half a Whisper, the new album from Hallie Wren Reed. Hushed, late-night country-pop, out now — songs on YouTube.";
 
-const outfit = Outfit({
+const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
-  variable: "--font-outfit",
+  weight: ["400", "500"],
+  style: ["normal", "italic"],
+  variable: "--font-cormorant",
   display: "swap",
 });
 
-const fraunces = Fraunces({
+const jost = Jost({
   subsets: ["latin"],
-  variable: "--font-fraunces",
-  display: "swap",
-});
-
-const alfa = Alfa_Slab_One({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-alfa",
+  weight: ["400", "500"],
+  variable: "--font-jost",
   display: "swap",
 });
 
@@ -40,37 +35,39 @@ export const metadata: Metadata = {
   authors: [{ name: "Hallie Wren Reed" }],
   keywords: [
     "Hallie Wren Reed",
+    "Half a Whisper",
+    "Vacancy Sign",
+    "Say It Quiet",
+    "The Space Between",
+    "Headlights",
+    "Velvet Hour",
+    "Undertow",
     "Soft at the Elbows",
     "Green Country",
     "country music",
-    "Porch Light",
-    "Come Back Slow",
-    "Oklahoma Wind",
-    "Two Counties Over",
-    "Where the Hills Stay Green",
-    "Carry It Tonight",
-    "Wide Open Friday",
+    "country-pop",
   ],
   openGraph: {
     title: pageTitle,
-    description: artist.tagline,
+    description: pageDescription,
     type: "website",
     locale: "en_US",
     siteName: "Hallie Wren Reed",
+    url: "/",
     images: [
       {
-        url: "/images/banner.jpg",
-        width: 1920,
-        height: 1080,
-        alt: "Hallie Wren Reed — Soft at the Elbows and Green Country",
+        url: "/images/og-half-a-whisper.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Hallie Wren Reed — Half a Whisper, the new album, out now",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title: pageTitle,
-    description: artist.tagline,
-    images: ["/images/banner.jpg"],
+    description: pageDescription,
+    images: ["/images/og-half-a-whisper.jpg"],
   },
   icons: {
     icon: [
@@ -82,7 +79,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#071018",
+  themeColor: "#080B14",
   colorScheme: "dark",
   width: "device-width",
   initialScale: 1,
@@ -94,7 +91,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${outfit.variable} ${fraunces.variable} ${alfa.variable}`}>
+    <html lang="en" className={`${cormorant.variable} ${jost.variable}`}>
       <body>{children}</body>
     </html>
   );
