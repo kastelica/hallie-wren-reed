@@ -1,8 +1,8 @@
 # Hallie Wren Reed
 
-Custom artist homepage for **Hallie Wren Reed** — a link tree for *Soft at the Elbows* and *Green Country*.
+Homepage for **Hallie Wren Reed**, focused on the album *Half a Whisper*.
 
-Night-porch country: YouTube is live. Spotify, Apple Music, TikTok, and Instagram stay marked **Coming soon** until real URLs exist (no placeholder social links).
+Quiet late-night layout: near-black blue, one cool glow, cream Cormorant Garamond titles, wide-tracked Jost labels. YouTube is live. Spotify, Apple Music, TikTok, and Instagram stay marked **Coming soon** until real URLs exist.
 
 ## Local development
 
@@ -24,17 +24,12 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Deploy on Vercel
 
-This repo is a standard Next.js App Router app. `vercel.json` sets the framework and a few security / image-cache headers.
+This repo is a standard Next.js App Router app. `vercel.json` sets the framework and a few security / image-cache headers. Leave that file and the domain settings as they are.
 
-1. Push the repo to GitHub (already the case for this project).
-2. In [Vercel](https://vercel.com), **Add New → Project** and import `hallie-wren-reed`.
-3. Framework preset: **Next.js**. Build command `npm run build`, output detected automatically. No env vars required.
-4. Deploy. Attach a custom domain when you have one. On Vercel, Open Graph image URLs resolve from the deployment host automatically.
+Preview deploys on pull requests use the same settings. Open Graph image URLs resolve from the deployment host.
 
-Preview deploys on pull requests work with the same settings.
+## Editing
 
-## Editing links
+Album titles, track links, and coming-soon rows live in `app/lib/data.ts`. To turn a coming-soon row live, give it a real URL in the page — do not add a placeholder profile.
 
-Links live in `app/lib/data.ts`, in display order. To turn a **Coming soon** row live, add a real `href` and set `live: true`. Do not add fake profile URLs.
-
-Artwork is in `public/images/` (`banner.jpg` night-porch album art, `avatar.jpg` profile photo).
+The social image is `public/images/og-half-a-whisper.jpg` (1200×630).

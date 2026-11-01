@@ -1,50 +1,39 @@
-import Image from "next/image";
-import { LinkRow } from "@/app/components/LinkRow";
-import { artist, links, type Track } from "@/app/lib/data";
+import { artist, comingSoon, earlierAlbums, featuredAlbum, type Track } from "@/app/lib/data";
 
-function TrackList({ tracks }: { tracks: Track[] }) {
-  const linked = tracks.some((track) => track.href);
-
-  if (!linked) {
-    return <span className="setlist-tracks">{tracks.map((track) => track.title).join(" · ")}</span>;
+function TrackLink({ track }: { track: Track }) {
+  if (!track.href) {
+    return <span>{track.title}</span>;
   }
 
   return (
-    <ul className="setlist-tracks">
-      {tracks.map((track) => (
-        <li key={track.title}>
-          {track.href ? (
-            <a href={track.href} target="_blank" rel="noopener noreferrer">
-              {track.title}
-              <span className="sr-only"> lyric video</span>
-            </a>
-          ) : (
-            track.title
-          )}
-        </li>
-      ))}
-    </ul>
+    <a href={track.href} target="_blank" rel="noopener noreferrer">
+      {track.title}
+      <span className="sr-only"> on YouTube</span>
+    </a>
   );
 }
 
 export default function HomePage() {
+  const albums = [featuredAlbum, ...earlierAlbums];
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "MusicGroup",
     name: artist.name,
-    genre: "Country",
-    description: artist.tagline,
-    album: artist.albums.map((album) => ({
+    url: "https://www.hallie.rocks",
+    genre: ["Country", "Pop"],
+    album: albums.map((album) => ({
       "@type": "MusicAlbum",
       name: album.title,
       url: album.playlistHref,
+      byArtist: { "@type": "MusicGroup", name: artist.name },
       track: album.tracks.map((track) => ({
         "@type": "MusicRecording",
         name: track.title,
         ...(track.href ? { url: track.href } : {}),
       })),
     })),
-    sameAs: ["https://www.youtube.com/@HallieWrenReed"],
+    sameAs: [artist.youtube],
   };
 
   return (
@@ -53,86 +42,104 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <a className="skip-link" href="#links">
-        Skip to links
+      <a className="skip-link" href="#tracklist">
+        Skip to tracklist
       </a>
-      <div className="stage">
-        <div className="backdrop" aria-hidden="true">
-          <Image
-            className="backdrop-photo"
-            src="/images/banner.jpg"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            unoptimized
-          />
-          <div className="backdrop-wash" />
-          <div className="backdrop-grain" />
-        </div>
 
-        <header className="masthead">
-          <p className="masthead-kicker">{artist.name}</p>
-          <div className="masthead-albums">
-            {artist.albums.map((album) => (
-              <p className="masthead-title" key={album.id}>
-                {album.title}
-              </p>
-            ))}
-          </div>
-        </header>
+      <header className="hero">
+        <p className="eyebrow">{artist.name}</p>
+        <h1 className="hero-title">{featuredAlbum.title}</h1>
+        <div className="rule" aria-hidden="true" />
+        <p className="lede">{featuredAlbum.releaseLine}</p>
+        <a
+          className="button"
+          href={featuredAlbum.playlistHref}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Play the album
+          <span className="sr-only">, {featuredAlbum.title}, on YouTube</span>
+        </a>
+        <a className="channel" href={artist.youtube} target="_blank" rel="noopener noreferrer">
+          <span className="channel-kicker">YouTube</span>
+          <span className="channel-handle">{artist.handle}</span>
+        </a>
+      </header>
 
-        <main className="card" id="home">
-          <div className="avatar-wrap">
-            <Image
-              className="avatar"
-              src="/images/avatar.jpg"
-              alt="Hallie Wren Reed, smiling in golden-hour light"
-              width={160}
-              height={160}
-              priority
-            />
-          </div>
-
-          <div className="kickers">
-            {artist.albums.map((album) => (
-              <p className="kicker" key={album.id}>
-                {album.title}
-              </p>
-            ))}
-          </div>
-          <h1 className="name">{artist.name}</h1>
-          <p className="tagline">{artist.tagline}</p>
-
-          <div className="records">
-            {artist.albums.map((album) => (
-              <section className="record" key={album.id} aria-labelledby={`${album.id}-label`}>
-                <h2 className="setlist-label" id={`${album.id}-label`}>
-                  {album.title}
-                </h2>
-                <div className="setlist">
-                  <span className="sr-only">From the record. </span>
-                  <TrackList tracks={album.tracks} />
-                </div>
-              </section>
-            ))}
-          </div>
-
-          <nav id="links" aria-label="Listen and follow">
-            <ul className="links">
-              {links.map((link) => (
-                <li key={link.id}>
-                  <LinkRow link={link} />
+      <main>
+        <section className="band" id="tracklist" aria-labelledby="tracklist-label">
+          <h2 className="section-label" id="tracklist-label">
+            Tracklist
+          </h2>
+          <ol className="tracks">
+            {featuredAlbum.tracks.map((track, index) =>
+              track.href ? (
+                <li key={track.title}>
+                  <a href={track.href} target="_blank" rel="noopener noreferrer">
+                    <span className="num" aria-hidden="true">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span className="track-title">{track.title}</span>
+                    <span className="sr-only"> on YouTube</span>
+                  </a>
                 </li>
-              ))}
-            </ul>
-          </nav>
+              ) : null,
+            )}
+          </ol>
+        </section>
 
-          <p className="footnote">
-            Porch-light country. More rooms of this house still to open.
-          </p>
-        </main>
-      </div>
+        <section className="band earlier" aria-labelledby="earlier-label">
+          <h2 className="section-label" id="earlier-label">
+            Earlier albums
+          </h2>
+          <div className="earlier-grid">
+            {earlierAlbums.map((album) => (
+              <article className="earlier-album" key={album.id} aria-labelledby={`${album.id}-title`}>
+                <h3 className="earlier-title" id={`${album.id}-title`}>
+                  {album.title}
+                </h3>
+                <ul className="earlier-tracks">
+                  {album.tracks.map((track) => (
+                    <li key={track.title}>
+                      <TrackLink track={track} />
+                    </li>
+                  ))}
+                </ul>
+                <a
+                  className="text-link"
+                  href={album.playlistHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Playlist
+                  <span className="sr-only"> for {album.title} on YouTube</span>
+                </a>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="band soon" aria-labelledby="soon-label">
+          <h2 className="section-label" id="soon-label">
+            Streaming & social
+          </h2>
+          <ul className="soon-list">
+            {comingSoon.map((item) => (
+              <li key={item.id}>
+                <span className="soon-copy">
+                  <span className="soon-label">{item.label}</span>
+                  <span className="soon-detail">{item.detail}</span>
+                </span>
+                <span className="soon-state">Coming soon</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </main>
+
+      <footer className="footer">
+        <p className="eyebrow">{artist.name}</p>
+      </footer>
     </>
   );
 }
