@@ -2,7 +2,7 @@
 
 Homepage for **Hallie Wren Reed**, a compact link-in-bio. Every song on *Half a Whisper*, *Green Country*, and *Soft at the Elbows* is a numbered button.
 
-Quiet late-night column: near-black blue, one cool glow, cream Cormorant Garamond titles, wide-tracked Jost labels. YouTube is live. Spotify, Apple Music, TikTok, and Instagram stay marked **Coming soon** until real URLs exist.
+Quiet late-night column: near-black blue, one cool glow, cream Cormorant Garamond titles, wide-tracked Jost labels. Each album sits on its own panel. YouTube, TikTok, and Instagram are live. Spotify and Apple Music stay marked **Coming soon** until real URLs exist.
 
 ## Local development
 
