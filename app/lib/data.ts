@@ -40,12 +40,13 @@ export const albums: Album[] = [
     featured: true,
     tracks: [
       { title: "Vacancy Sign", href: video("XwJjesYaVEw") },
-      { title: "Vacancy Sign Alternate Version", href: video("0f8LktwK1_o") },
       { title: "Undertow", href: video("CF5hbFU8Fjc") },
       { title: "Velvet Hour", href: video("G2m2yUkO5IQ") },
       { title: "Headlights", href: video("mWMuXX31ea8") },
       { title: "The Space Between", href: video("tu_f_tALJwg") },
+      { title: "Technicolor", href: video("a_fOp6E7gmI") },
       { title: "Say It Quiet", href: video("IkNqUEHaiwU") },
+      { title: "Vacancy Sign (Alternate Version)", href: video("0f8LktwK1_o") },
     ],
   },
   {
@@ -67,6 +68,7 @@ export const albums: Album[] = [
       { title: "Satellites", href: video("nPQkDs7RAF8") },
       { title: "Thriving", href: video("oLeLUeR7URE") },
       { title: "Heat Lightning", href: video("IekvMp48qF4") },
+      { title: "Emergency Contact", href: video("AJbOS_sNsns") },
     ],
   },
   {
