@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Jost } from "next/font/google";
+import { Cormorant_Garamond, Fraunces, Jost, Zilla_Slab } from "next/font/google";
 import { albums } from "@/app/lib/data";
 import "./globals.css";
 
@@ -19,6 +19,21 @@ const jost = Jost({
   subsets: ["latin"],
   weight: ["400", "500"],
   variable: "--font-jost",
+  display: "swap",
+});
+
+const zilla = Zilla_Slab({
+  subsets: ["latin"],
+  weight: ["500"],
+  variable: "--font-zilla",
+  display: "swap",
+});
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  weight: ["500"],
+  style: ["normal", "italic"],
+  variable: "--font-fraunces",
   display: "swap",
 });
 
@@ -84,7 +99,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${jost.variable}`}>
+    <html lang="en" className={`${cormorant.variable} ${jost.variable} ${zilla.variable} ${fraunces.variable}`}>
       <body>{children}</body>
     </html>
   );

@@ -22,8 +22,15 @@ export const artist = {
   name: "Hallie Wren Reed",
   tagline: "New album Half a Whisper, out now",
   youtube: "https://www.youtube.com/@HallieWrenReed",
-  handle: "@HallieWrenReed",
+  tiktok: "https://www.tiktok.com/@halliewrenreed",
+  instagram: "https://www.instagram.com/halliewrenreed/",
 };
+
+export const socials = [
+  { id: "youtube", label: "YouTube", href: artist.youtube },
+  { id: "tiktok", label: "TikTok", href: artist.tiktok },
+  { id: "instagram", label: "Instagram", href: artist.instagram },
+] as const;
 
 export const albums: Album[] = [
   {
@@ -91,6 +98,6 @@ export const shorts = {
 export const comingSoon: ComingSoon[] = [
   { id: "spotify", label: "Spotify" },
   { id: "apple", label: "Apple Music" },
-  { id: "tiktok", label: "TikTok" },
-  { id: "instagram", label: "Instagram" },
 ];
+
+export const albumTeaser = "Album 4 · being recorded now";
